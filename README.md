@@ -1,2 +1,3 @@
 # Snake: Learning Python for Kids
-eewdddew
+## HYL Hackathon 2022: Begineers' Stream
+This project
