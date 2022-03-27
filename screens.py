@@ -1,16 +1,20 @@
+from tracemalloc import stop
+from turtle import end_fill
 import pygame 
 import sys
 import keyboard
 clock = pygame.time.Clock()
 pygame.init()
 screen = pygame.display.set_mode(size=(900,450))
-congrats = pygame.image.load('Congratulations!.png')
-print_lesson = pygame.image.load('printlesson.png')
-printpract = pygame.image.load('printpract.png')
-tryagain= pygame.image.load('try-again-handwritten-white-background-208656693.jpg')
+congrats = pygame.image.load('snakelesson1.png')
+print_lesson = pygame.image.load('snakelesson2.png')
+printpract = pygame.image.load('snakelesson3.png')
+tryagain= pygame.image.load('tryagain.png')
 try_again= pygame.transform.scale(tryagain, (200,100))
-correct = pygame.image.load('tick-icon-vector-symbol-checkmark-isolated-white-background-checked-correct-choice-sign-check-mark-checkbox-picto-pictogram-143596426.jpg')
-
+correct = pygame.image.load('check.png')
+lesson2_1 = pygame.image.load('snakelesson4.png')
+lesson2_2 = pygame.image.load('snakelesson5.png')
+lesson2_3 = pygame.image.load('snakelesson6.png')
 width, height = 900, 450
 
 def test():
@@ -41,21 +45,22 @@ def test():
         input_rect.w = max(100, text_surface.get_width()+10)
         pygame.display.flip()
         clock.tick(60)
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if user_text == "print(\"Python is a snake\")":
-                show.blit(correct, (0, 0))
-                pygame.display.update()
-                clock.tick(10)
-                input_rect = pygame.Rect(0, 0, 0, 0)
-                text_surface = base_font.render(user_text, True, (100,100,100))
-                pygame.display.flip()
-
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT:
+                if user_text == "print(\"Python is a snake!\")":
+                    show.blit(correct, (0, 0))
+                    pygame.display.update()
+                    clock.tick(10)
+                    input_rect = pygame.Rect(0, 0, 0, 0)
+                    text_surface = base_font.render(user_text, True, (100,100,100))
+                    pygame.display.flip()
             else:
                 show.blit(try_again, (-10, 0))
                 pygame.display.flip()
-                clock.tick(10) 
+                clock.tick(10)
 
-def comic(congrats, print_lesson, printpract):
+
+def lesson1(congrats, print_lesson, printpract):
     if show_screen == 0:
         show.blit(congrats, (0, 0))
         pygame.display.update()
@@ -69,23 +74,44 @@ def comic(congrats, print_lesson, printpract):
         pygame.display.update()
         clock.tick(10)
         test()
-
         
+def lesson2(lesson2_1, lesson2_2, lesson2_3):
+    if show_screen == 3:
+        show.blit(lesson2_1, (0, 0))
+        pygame.display.update()
+        clock.tick(10) 
+    if show_screen == 4:                
+        show.blit(lesson2_2, (0, 0))
+        pygame.display.update()
+        clock.tick(10)
+    if show_screen == 5:                
+        show.blit(lesson2_3, (0, 0))
+        pygame.display.update()
+        clock.tick(10)
 
-        
 
     
-
+show_screen = 0
 show = pygame.display.set_mode((width, height))
 
-show_screen = 0
+
 running = True
 while running:
     for event in pygame.event.get(): 
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            # if event.type == pygame.K_RETURN:
-            show_screen += 1
-    comic(congrats, print_lesson, printpract)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT:
+                show_screen += 1
+            if event.key == pygame.K_LEFT:
+                show_screen -= 1
+    lesson1(congrats, print_lesson, printpract)
+    lesson2(lesson2_1, lesson2_2, lesson2_3)
+    for event in pygame.event.get(): 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT:
+                show_screen += 1
+            if event.key == pygame.K_LEFT:
+                show_screen -= 1
+    
 
 pygame.quit()
 
