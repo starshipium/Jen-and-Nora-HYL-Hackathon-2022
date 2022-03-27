@@ -5,7 +5,7 @@ Our project is an interactive, multi-level game that introduces kids to the basi
 ## How We Built It
 We used PyGame and VSCode to create the code for our program and a run.bat file to make the Python file executable. Canva played a large role in creating all the graphics displayed on the game.
 
-##How to Play it
+## How to Play it
 1. Download all GitHub files into a folder
 2. Open in VSCode
 3. Create a run.bat file
